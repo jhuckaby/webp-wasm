@@ -1,0 +1,30 @@
+{
+  "name": "webp-wasm",
+  "version": "1.0.0",
+  "description": "Encode and decode WEBP images using libwebp compiled to WebAssembly.",
+  "author": "Joseph Huckaby <jhuckaby@gmail.com>",
+  "homepage": "https://github.com/jhuckaby/webp-wasm",
+  "license": "apache-2.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jhuckaby/webp-wasm"
+  },
+  "bugs": {
+    "url": "https://github.com/jhuckaby/webp-wasm/issues"
+  },
+  "keywords": [
+    "webp",
+    "wasm",
+	"libwebp",
+    "WebAssembly",
+	"squoosh",
+	"canvas"
+  ],
+  "dependencies": {
+	"esm": "3.2.25"
+  },
+  "scripts": {
+    "build": "sh build.sh"
+  }
+}
