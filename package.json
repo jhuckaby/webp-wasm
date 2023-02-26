@@ -1,7 +1,7 @@
 {
   "name": "webp-wasm",
-  "version": "1.0.0",
-  "description": "Encode and decode WEBP images using libwebp compiled to WebAssembly.",
+  "version": "1.0.1",
+  "description": "Encode and decode WebP images using libwebp compiled to WebAssembly.",
   "author": "Joseph Huckaby <jhuckaby@gmail.com>",
   "homepage": "https://github.com/jhuckaby/webp-wasm",
   "license": "apache-2.0",

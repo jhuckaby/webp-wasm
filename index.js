@@ -1,4 +1,4 @@
-// WEBP Encoder and Decoder Library
+// WebP Encoder and Decoder Library
 // Copyright (c) 2023 Joseph Huckaby
 // Released under the Apache-2.0 License
 
@@ -91,7 +91,7 @@ module.exports = {
 	},
 	
 	decode(buffer = null, callback = null) {
-		// decode WEBP binary buffer to pixel array
+		// decode WebP binary buffer to pixel array
 		// accepts Buffer or ArrayBuffer
 		// returns ImageData: { data(Uint8ClampedArray), width, height } 
 		var self = this;
@@ -110,7 +110,7 @@ module.exports = {
 	},
 	
 	encode(imgData = null, userOpts = {}, callback = null) {
-		// encode pixel array to WEBP binary buffer
+		// encode pixel array to WebP binary buffer
 		// returns Node.js Buffer
 		var self = this;
 		

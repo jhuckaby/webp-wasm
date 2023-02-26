@@ -1,14 +1,14 @@
 # Overview
 
-**webp-wasm** is a module for encoding and decoding WEBP images using WebAssembly.  It borrows the WEBP codecs from [Squoosh](https://github.com/GoogleChromeLabs/squoosh), an open-source web app made by Chrome Labs, but it is built specifically for Node.js.  Note that this will not be as fast as native C++ bindings to [libwebp](https://chromium.googlesource.com/webm/libwebp), but it's still very fast.
+**webp-wasm** is a module for encoding and decoding WebP images using WebAssembly.  It borrows the WebP codecs from [Squoosh](https://github.com/GoogleChromeLabs/squoosh), an open-source web app made by Chrome Labs, but it is built specifically for Node.js.  Note that this will not be as fast as native C++ bindings to [libwebp](https://chromium.googlesource.com/webm/libwebp), but it's still very fast.
 
-WEBP image files are decoded to RGBA pixel buffers, similar to the browser [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) structure.  Likewise, when encoding pixels back to WEBP, an ImageData-like object is expected, with an RGBA pixel buffer ([Uint8ClampedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray)).  This is designed to interoperate with libraries such as [node-canvas](https://github.com/Automattic/node-canvas).
+WebP image files are decoded to RGBA pixel buffers, similar to the browser [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) structure.  Likewise, when encoding pixels back to WebP, an ImageData-like object is expected, with an RGBA pixel buffer ([Uint8ClampedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray)).  This is designed to interoperate with libraries such as [node-canvas](https://github.com/Automattic/node-canvas).
 
 Please note that webp-wasm ships with WebAssembly components copied from [Squoosh](https://github.com/GoogleChromeLabs/squoosh), which is open source and has an [Apache 2.0 license](https://github.com/GoogleChromeLabs/squoosh/blob/dev/LICENSE).
 
 ## Features
 
-- Encode and decode WEBP images, with full support for alpha transparency.
+- Encode and decode WebP images, with full support for alpha transparency.
 - Dynamic loading of WebAssembly modules on first use, or by manually calling `load()`.
 - Lots of available options for encoding.
 - No memory leaks.
@@ -42,7 +42,7 @@ ImageData {
 }
 ```
 
-And here is an example of encoding the pixel data back to WEBP:
+And here is an example of encoding the pixel data back to WebP:
 
 ```js
 let buffer = await webp.encode(imgData, { quality: 75 });
@@ -51,7 +51,7 @@ await fs.writeFile('my-new-image.webp', buffer);
 
 ## node-canvas
 
-Here is an example of reading and writing a WEBP image using webp-wasm and [node-canvas](https://github.com/Automattic/node-canvas):
+Here is an example of reading and writing a WebP image using webp-wasm and [node-canvas](https://github.com/Automattic/node-canvas):
 
 ```js
 const fs = require('fs/promises');
@@ -59,10 +59,10 @@ const { createCanvas, createImageData } = require('canvas');
 const webp = require('webp-wasm');
 
 (async function() {
-	// load WEBP file from disk into buffer
+	// load WebP file from disk into buffer
 	let inBuf = await fs.readFile('my-image.webp');
 	
-	// decode WEBP into RGBA pixels (ImageData)
+	// decode WebP into RGBA pixels (ImageData)
 	let image = await webp.decode(inBuf);
 	
 	// create canvas and 2d context
@@ -90,10 +90,10 @@ const webp = require('webp-wasm');
 	// extract modified pixels from canvas
 	let finalImgData = context.getImageData(0, 0, image.width, image.height);
 	
-	// compress back to WEBP
+	// compress back to WebP
 	let outBuf = await webp.encode(finalImgData, { quality: 75 });
 	
-	// save final WEBP to disk
+	// save final WebP to disk
 	await fs.writeFile('my-new-image.webp', outBuf);
 })();
 ```
@@ -102,7 +102,7 @@ const webp = require('webp-wasm');
 
 ## load
 
-The WEBP WebAssembly code is automatically loaded from disk and compiled on the first call to [encode()](#encode) or [decode()](#decode).  However, if you want more control over this process, you can await `load()` at any time.  This will load both the encoder and decoder WASM modules, making them ready for use.  Example:
+The WebP WebAssembly code is automatically loaded from disk and compiled on the first call to [encode()](#encode) or [decode()](#decode).  However, if you want more control over this process, you can await `load()` at any time.  This will load both the encoder and decoder WASM modules, making them ready for use.  Example:
 
 ```js
 await webp.load();
@@ -112,7 +112,7 @@ await webp.load();
 
 ## decode
 
-The `decode()` function decodes a WEBP file into pixels.  Specifically, it takes a [Buffer](https://nodejs.org/api/buffer.html) or [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer), and produces an [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) object, containing the RGBA pixels and image dimensions.  Example use:
+The `decode()` function decodes a WebP file into pixels.  Specifically, it takes a [Buffer](https://nodejs.org/api/buffer.html) or [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer), and produces an [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) object, containing the RGBA pixels and image dimensions.  Example use:
 
 ```js
 const webp = require('webp-wasm');
@@ -131,7 +131,7 @@ The resulting object will have the following properties:
 
 ## encode
 
-The `encode()` function encodes an image into WEBP format.  Specifically, it takes an [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) object containing RGBA pixels and image dimensions, an object containing encoder options, and produces a WEBP binary [Buffer](https://nodejs.org/api/buffer.html) suitable for writing to a `.webp` file.  Example:
+The `encode()` function encodes an image into WebP format.  Specifically, it takes an [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) object containing RGBA pixels and image dimensions, an object containing encoder options, and produces a WebP binary [Buffer](https://nodejs.org/api/buffer.html) suitable for writing to a `.webp` file.  Example:
 
 ```js
 let buffer = await webp.encode(imgData, { quality: 75 });
@@ -173,7 +173,7 @@ The options object has the following defaults, which you can override selectivel
 
 # Caveats
 
-Unfortunately, the [Squoosh WEBP decoder](https://github.com/GoogleChromeLabs/squoosh/blob/dev/codecs/webp/dec/webp_dec.cpp#L20-L23) requires a global [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) object definition, as it was originally written for use in browsers.  Since Node.js doesn't provide one of these, we automatically polyfill one for you:
+Unfortunately, the [Squoosh WebP decoder](https://github.com/GoogleChromeLabs/squoosh/blob/dev/codecs/webp/dec/webp_dec.cpp#L20-L23) requires a global [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) object definition, as it was originally written for use in browsers.  Since Node.js doesn't provide one of these, we automatically polyfill one for you:
 
 ```js
 class ImageData {
@@ -198,7 +198,7 @@ cd webp-wasm
 npm install
 ```
 
-To pull down the latest WEBP WebAssembly code from Squoosh, run the build script:
+To pull down the latest WebP WebAssembly code from Squoosh, run the build script:
 
 ```
 npm run build
