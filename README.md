@@ -105,6 +105,8 @@ const webp = require('webp-wasm');
 The WebP WebAssembly code is automatically loaded from disk and compiled on the first call to [encode()](#encode) or [decode()](#decode).  However, if you want more control over this process, you can await `load()` at any time.  This will load both the encoder and decoder WASM modules, making them ready for use.  Example:
 
 ```js
+const webp = require('webp-wasm');
+
 await webp.load();
 ```
 
@@ -116,6 +118,7 @@ The `decode()` function decodes a WebP file into pixels.  Specifically, it takes
 
 ```js
 const webp = require('webp-wasm');
+
 let imgData = await webp.decode(buffer);
 ```
 
@@ -134,6 +137,8 @@ The resulting object will have the following properties:
 The `encode()` function encodes an image into WebP format.  Specifically, it takes an [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) object containing RGBA pixels and image dimensions, an object containing encoder options, and produces a WebP binary [Buffer](https://nodejs.org/api/buffer.html) suitable for writing to a `.webp` file.  Example:
 
 ```js
+const webp = require('webp-wasm');
+
 let buffer = await webp.encode(imgData, { quality: 75 });
 ```
 
