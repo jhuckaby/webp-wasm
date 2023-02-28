@@ -105,7 +105,10 @@ module.exports = {
 			return;
 		}
 		
-		var imgData = decoder.decode( buffer.buffer || buffer );
+		var imgData = null;
+		try { imgData = decoder.decode( buffer.buffer || buffer ); }
+		catch (err) { return callback(err); }
+		
 		callback( null, imgData );
 	},
 	
@@ -124,7 +127,11 @@ module.exports = {
 		}
 		
 		var opts = Object.assign( {}, DEFAULT_ENCODE_OPTS, userOpts );
-		var result = encoder.encode( imgData.data, imgData.width, imgData.height, opts );
+		var result = null;
+		
+		try { result = encoder.encode( imgData.data, imgData.width, imgData.height, opts ); }
+		catch (err) { return callback(err); }
+		
 		callback( null, Buffer.from(result.buffer) );
 	}
 	
