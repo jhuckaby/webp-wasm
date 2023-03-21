@@ -5,7 +5,11 @@
 const Path = require('path');
 const fs = require('fs');
 const util = require('util');
-const webp = require('./bridge.js');
+
+var webp = {
+	enc: require('./webp_node_enc.js'),
+	dec: require('./webp_node_dec.js')
+};
 
 var encoder = null;
 var decoder = null;
@@ -69,7 +73,7 @@ module.exports = {
 		fs.readFile( Path.join(__dirname, 'webp_node_enc.wasm'), function(err, buf) {
 			if (err) return callback(err);
 			
-			webp.enc.default({ wasmBinary: buf }).then( function(module) {
+			webp.enc({ wasmBinary: buf }).then( function(module) {
 				encoder = module;
 				callback();
 			}); // promise
@@ -83,7 +87,7 @@ module.exports = {
 		fs.readFile( Path.join(__dirname, 'webp_node_dec.wasm'), function(err, buf) {
 			if (err) return callback(err);
 			
-			webp.dec.default({ wasmBinary: buf }).then( function(module) {
+			webp.dec({ wasmBinary: buf }).then( function(module) {
 				decoder = module;
 				callback();
 			}); // promise

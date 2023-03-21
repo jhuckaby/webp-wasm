@@ -1,6 +1,6 @@
 {
   "name": "webp-wasm",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Encode and decode WebP images using libwebp compiled to WebAssembly.",
   "author": "Joseph Huckaby <jhuckaby@gmail.com>",
   "homepage": "https://github.com/jhuckaby/webp-wasm",
@@ -21,9 +21,6 @@
 	"squoosh",
 	"canvas"
   ],
-  "dependencies": {
-	"esm": "3.2.25"
-  },
   "scripts": {
     "build": "sh build.sh"
   }
