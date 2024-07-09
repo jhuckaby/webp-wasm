@@ -23,5 +23,6 @@
   ],
   "scripts": {
     "build": "sh build.sh"
-  }
+  },
+  "types": "webp-wasm.d.ts"
 }
