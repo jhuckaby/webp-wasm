@@ -48,4 +48,9 @@ declare module "webp-wasm" {
 
     // Define the encode function
     export function encode(imageData: ImageData, options?: EncodeOptions): Promise<Buffer>;
+	
+	// For users who prefer callback-style:
+	export function load(callback: (err: Error | null) => void): void;
+	export function decode(buffer: Buffer | ArrayBuffer, callback: (err: Error | null, imgData: ImageData) => void): void;
+	export function encode(imgData: ImageData, options: EncodeOptions, callback: (err: Error | null, buffer: Buffer) => void): void;
 }
